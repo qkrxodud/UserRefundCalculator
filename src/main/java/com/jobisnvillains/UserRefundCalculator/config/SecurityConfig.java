@@ -1,5 +1,6 @@
 package com.jobisnvillains.UserRefundCalculator.config;
 
+import com.jobisnvillains.UserRefundCalculator.filter.JwtRequestFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -17,21 +19,34 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class SecurityConfig {
     private static final String[] PERMIT_URL_ARRAY = {
-            "/3o3/swagger-ui/**", "/3o3/swagger-ui.html", "/3o3/v3/api-docs/**", "/3o3/swagger.html",
+            "/3o3/swagger-ui/**", "/3o3/swagger-ui.html",
+            "/3o3/v3/api-docs/**", "/3o3/swagger-config",
+            "/v3/api-docs/**", "/3o3/swagger.html",
+            "/3o3/swagger-ui/index.html",
+            "/szs/signup", "/szs/login"
     };
+    private final JwtRequestFilter jwtRequestFilter;
     private final AuthenticationConfiguration authenticationConfiguration;
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.sessionManagement(session -> session.disable());
 
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         http.csrf(csrfConfigurer -> csrfConfigurer.disable())
                 .authorizeHttpRequests( request -> request.requestMatchers(PERMIT_URL_ARRAY)
                         .permitAll());
+//                .antMatchers().permitAll()
+//                .antMatchers("", "").permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                .sessionManagement().disable();
 
         return http.build();
 
+//        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
