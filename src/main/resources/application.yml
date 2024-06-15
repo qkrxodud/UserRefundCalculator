@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/test
+    url: jdbc:h2:mem:test
     driverClassName: org.h2.Driver
     username: sa
     password:
@@ -24,3 +24,7 @@ server:
 
 jwt:
   secret: VXNlclJlZnVuZENhbGN1bGF0b3I=
+
+springdoc:
+  swagger-ui:
+    path: /3o3/swagger.html
