@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/test
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: create # TODO 추후 변경
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+jwt:
+  secret: VXNlclJlZnVuZENhbGN1bGF0b3I=
