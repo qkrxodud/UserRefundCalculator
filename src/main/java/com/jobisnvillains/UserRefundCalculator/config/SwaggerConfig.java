@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SwaggerConfig {
 
+
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI().info(apiInfo())
@@ -26,8 +27,10 @@ public class SwaggerConfig {
 
     private Components certificationJwt() {
         return new Components().addSecuritySchemes("bearer-jwt", new SecurityScheme().type(SecurityScheme.Type.HTTP)
-                        .scheme("bearer")
-                        .bearerFormat("JWT"));
+                .in(SecurityScheme.In.HEADER)
+                .name("JWT Authentication")
+                .scheme("bearer")
+                .bearerFormat("JWT"));
     }
 
     private SecurityRequirement addSecurityItem() {

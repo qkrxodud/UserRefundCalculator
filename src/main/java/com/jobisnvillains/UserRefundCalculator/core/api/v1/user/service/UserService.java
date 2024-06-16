@@ -30,14 +30,14 @@ public class UserService implements UserDetailsService {
         return userAppender.saveUser(user, bCryptPasswordEncoder);
     }
 
-    public boolean login(String userId, String password) {
+    public boolean login(final String userId, final String password) {
         User byUserId = userReader.findByUserId(userId);
         byUserId.checkNotRegisterUser();
         return bCryptPasswordEncoder.matches(password, byUserId.getPassword());
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
         return null;
     }
 }

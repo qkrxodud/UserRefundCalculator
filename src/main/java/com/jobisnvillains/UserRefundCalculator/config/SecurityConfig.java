@@ -23,7 +23,7 @@ public class SecurityConfig {
             "/3o3/v3/api-docs/**", "/3o3/swagger-config",
             "/v3/api-docs/**", "/3o3/swagger.html",
             "/3o3/swagger-ui/index.html",
-            "/szs/signup", "/szs/login"
+            "/szs/signup", "/szs/login", "/szs/scrap",
     };
     private final JwtRequestFilter jwtRequestFilter;
     private final AuthenticationConfiguration authenticationConfiguration;

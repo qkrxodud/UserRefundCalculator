@@ -1,4 +1,4 @@
-package com.jobisnvillains.UserRefundCalculator.core.api.v1.user.controller.param;
+package com.jobisnvillains.UserRefundCalculator.core.api.v1.user.controller.request;
 
 import com.jobisnvillains.UserRefundCalculator.core.api.v1.user.domain.User;
 import com.jobisnvillains.UserRefundCalculator.exception.customexceptions.RegNoIllegalStateException;

@@ -1,4 +1,4 @@
-package com.jobisnvillains.UserRefundCalculator.core.api.v1.user.controller.param;
+package com.jobisnvillains.UserRefundCalculator.core.api.v1.user.controller.request;
 
 import lombok.Data;
 

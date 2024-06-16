@@ -29,3 +29,7 @@ jwt:
 springdoc:
   swagger-ui:
     path: /3o3/swagger.html
+
+scrap:
+  api-key: aXC8zK6puHIf9l53L8TiQg==
+  api-url: https://codetest-v4.3o3.co.kr/scrap
