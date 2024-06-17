@@ -1,8 +1,11 @@
-package com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.controller.info;
+package com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.domain;
+
+import lombok.Getter;
 
 import java.util.List;
 import java.util.Map;
 
+@Getter
 public class CreditCardDeduction {
     private int year;
     private MonthlyDeductionAmounts monthlyDeductionAmounts;

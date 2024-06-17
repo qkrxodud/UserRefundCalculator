@@ -1,4 +1,4 @@
-package com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.controller.info;
+package com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.domain;
 
 import lombok.Getter;
 import org.springframework.util.CollectionUtils;
@@ -9,17 +9,17 @@ import java.util.Locale;
 import java.util.Map;
 
 @Getter
-public class ScrapIncome {
+public class Income {
     private String name;
     private Long comprehensiveIncomeAmount;
     private PensionDeducations pensionDeductions;
-    private CreditCardDeduction creditCardDeductions;
+    private CreditCardDeduction creditCardDeduction;
     private Long taxCredit;
 
 
-    public ScrapIncome(Map<String, Object> responseData) {
+    public Income(Map<String, Object> responseData) {
         if (CollectionUtils.isEmpty(responseData)) {
-            throw new IllegalStateException("ScrapIncome 값이 비워 있습니다.");
+            throw new IllegalStateException("Income 값이 비워 있습니다.");
         }
         Map<String, Object> data = (Map<String, Object>) responseData.get("data");
         name = (String) data.get("이름");
@@ -27,7 +27,7 @@ public class ScrapIncome {
 
         Map<String, Object> deductions = (Map<String, Object>) data.get("소득공제");
         pensionDeductions = new PensionDeducations(deductions);
-        creditCardDeductions = new CreditCardDeduction(deductions);
+        creditCardDeduction = new CreditCardDeduction(deductions);
 
         taxCredit = getTexCredit(deductions.get("세액공제"));
     }
@@ -56,7 +56,6 @@ public class ScrapIncome {
         }
         return 0L;
     }
-
 
     private Long convertStingMoneyToLongMoney(String value) {
         try {

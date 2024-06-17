@@ -1,5 +1,8 @@
-package com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.controller.info;
+package com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.domain;
 
+import lombok.Getter;
+
+@Getter
 public class MonthlyDeductionAmount {
     private String month;
     private String deduction;

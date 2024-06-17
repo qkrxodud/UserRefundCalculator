@@ -1,7 +1,6 @@
 package com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.domain;
 
-import com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.controller.info.ScrapIncome;
-import com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.service.handler.ScrapHandler;
+import com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.handler.ScrapHandler;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -11,7 +10,7 @@ public class ScrapUser {
     private String userId;
     private String name;
     private String regNo;
-    private ScrapIncome scrapIncomeInfo;
+    private Income income;
 
     @Builder
     public ScrapUser(Long id, String userId, String name, String regNo) {
@@ -21,8 +20,9 @@ public class ScrapUser {
         this.regNo = regNo;
     }
 
-    public void getIncomeInfo(ScrapHandler scrapHandler) {
-        scrapIncomeInfo = scrapHandler.getScrapIncomeInfo(name, regNo);
+    public void initIncomeInfo(ScrapHandler scrapHandler) {
+        income = scrapHandler.getScrapIncomeInfo(name, regNo);
     }
+
 
 }

@@ -1,7 +1,7 @@
 package com.jobisnvillains.UserRefundCalculator.mock;
 
-import com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.controller.info.ScrapIncome;
-import com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.service.handler.ScrapHandler;
+import com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.domain.Income;
+import com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.handler.ScrapHandler;
 import com.jobisnvillains.UserRefundCalculator.exception.customexceptions.EmptyAPIDataStateException;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
@@ -19,7 +19,7 @@ public class FakeScrapHandler implements ScrapHandler {
     private final String apiKey = "aXC8zK6puHIf9l53L8TiQg==";
 
     @Override
-    public ScrapIncome getScrapIncomeInfo(String name, String regNo) {
+    public Income getScrapIncomeInfo(String name, String regNo) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
         headers.set("X-API-KEY", apiKey);
@@ -28,7 +28,7 @@ public class FakeScrapHandler implements ScrapHandler {
         requestData.put("name", name);
         requestData.put("regNo", regNo);
 
-        ScrapIncome scrapResponse = null;
+        Income scrapResponse = null;
         RestTemplate restTemplate = new RestTemplate();
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiUrl);
         HttpEntity<Map<String, String>> entity = new HttpEntity<>(requestData, headers);
@@ -41,7 +41,7 @@ public class FakeScrapHandler implements ScrapHandler {
                     Map.class
             );
             if (response.getStatusCode() == HttpStatus.OK) {
-                scrapResponse = new ScrapIncome(response.getBody());
+                scrapResponse = new Income(response.getBody());
             }
         } catch (HttpClientErrorException | HttpServerErrorException e) {
             System.out.println("HttpClientErrorException");

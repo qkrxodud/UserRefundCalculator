@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,11 +23,10 @@ public class ScrapApiController {
 
 
     @PostMapping("/scrap")
-    public ResponseEntity<?> scrapIncomeInfo(HttpServletRequest httpServletRequest) {
+    public ResponseEntity<?> saveIncome(HttpServletRequest httpServletRequest) {
         String authorization = httpServletRequest.getHeader("Authorization");
         String jwtToken = authorization.substring(7);
         scrapService.saveIncomeInfo(jwtUtil.extractUserId(jwtToken));
-
-        return null;
+        return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");
     }
 }

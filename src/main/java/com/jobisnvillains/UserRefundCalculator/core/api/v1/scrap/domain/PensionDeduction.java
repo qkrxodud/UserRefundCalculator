@@ -1,5 +1,8 @@
-package com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.controller.info;
+package com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.domain;
 
+import lombok.Getter;
+
+@Getter
 public class PensionDeduction {
     private String month;
     private String amount;

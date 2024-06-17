@@ -1,6 +1,6 @@
-package com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.service.handler;
+package com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.handler;
 
-import com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.controller.info.ScrapIncome;
+import com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.domain.Income;
 import com.jobisnvillains.UserRefundCalculator.exception.customexceptions.EmptyAPIDataStateException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,17 +27,16 @@ public class ScrapHandlerImpl implements ScrapHandler {
     @Value("${scrap.api-key}")
     private String apiKey;
 
-    public ScrapIncome getScrapIncomeInfo(String name, String regNo) {
+    public Income getScrapIncomeInfo(String name, String regNo) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
         headers.set("X-API-KEY", apiKey);
 
-        ScrapIncome scrapResponse = null;
+        Income scrapResponse = null;
         Map<String, String> requestData = new HashMap<>();
         requestData.put("name", name);
         requestData.put("regNo", regNo);
 
-        RestTemplate restTemplate = new RestTemplate();
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiUrl);
         HttpEntity<Map<String, String>> entity = new HttpEntity<>(requestData, headers);
         try {
@@ -48,7 +47,7 @@ public class ScrapHandlerImpl implements ScrapHandler {
                     Map.class
             );
             if (response.getStatusCode() == HttpStatus.OK) {
-                scrapResponse = new ScrapIncome(response.getBody());
+                scrapResponse = new Income(response.getBody());
             }
         } catch (HttpClientErrorException | HttpServerErrorException e) {
             log.error("API >> getScrapIncomeInfo >> getScrapIncomeInfo {}, name={}, reg={}", e.getMessage(), name, regNo);

@@ -5,7 +5,11 @@ import com.jobisnvillains.UserRefundCalculator.core.api.v1.user.domain.User;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -18,6 +22,8 @@ public class ScrapUserJpaEntity {
     private String name;
     private String regNo;
 
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
     @Builder
     public ScrapUserJpaEntity(Long id, String userId, String name, String regNo) {
@@ -40,6 +46,7 @@ public class ScrapUserJpaEntity {
 
     public static ScrapUserJpaEntity fromModel(final ScrapUser scrapUser) {
         return ScrapUserJpaEntity.builder()
+                .id(scrapUser.getId())
                 .userId(scrapUser.getUserId())
                 .name(scrapUser.getName())
                 .regNo(scrapUser.getRegNo())

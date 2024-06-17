@@ -4,7 +4,11 @@ import com.jobisnvillains.UserRefundCalculator.core.api.v1.user.domain.User;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -13,11 +17,14 @@ public class UserJpaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String userId;
     private String password;
     private String name;
     private String regNo;
 
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
     @Builder
     public UserJpaEntity(Long id, String userId, String password, String name, String regNo) {
