@@ -53,7 +53,7 @@ public class UserJpaEntity {
                 .userId(user.getUserId())
                 .password(bCryptPasswordEncoder.encode(user.getPassword()))
                 .name(user.getName())
-                .regNo(user.getRegNo())
+                .regNo(bCryptPasswordEncoder.encode(user.getRegNo()))
                 .build();
     }
 }

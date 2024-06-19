@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class SracpUserReader {
+public class ScrapUserReader {
     private final ScrapUserRepository userRepository;
 
     public ScrapUser findByUserId(final String userId) {

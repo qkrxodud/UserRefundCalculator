@@ -38,6 +38,13 @@ public class MonthlyDeductionAmountJapEntity {
         this.deduction = deduction;
     }
 
+    public MonthlyDeductionAmount toModel() {
+        return MonthlyDeductionAmount.builder()
+                .month(month)
+                .deduction(deduction)
+                .build();
+    }
+
     public MonthlyDeductionAmountJapEntity() {
 
     }

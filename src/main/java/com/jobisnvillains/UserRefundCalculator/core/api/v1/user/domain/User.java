@@ -12,7 +12,7 @@ public class User {
     private static final Long IS_REGISTER_MEMBER = 0L;
     private static final Long IS_NOT_REGISTER_MEMBER = -1L;
     private static final String ALREADY_USER_MSG = "이미등록된 사용자입니다.";
-    private static final String IS_NOT_REGISTER_MEMBER_MSG = "이미등록된 사용자입니다.";
+    private static final String IS_NOT_REGISTER_MEMBER_MSG = "등록되지 않은 사용자입니다.";
     private Long id;
     private String userId;
     private String password;

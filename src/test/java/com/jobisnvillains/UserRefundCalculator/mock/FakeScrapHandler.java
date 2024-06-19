@@ -1,7 +1,7 @@
 package com.jobisnvillains.UserRefundCalculator.mock;
 
 import com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.domain.Income;
-import com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.handler.ScrapHandler;
+import com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.handler.port.ScrapHandler;
 import com.jobisnvillains.UserRefundCalculator.exception.customexceptions.EmptyAPIDataStateException;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;

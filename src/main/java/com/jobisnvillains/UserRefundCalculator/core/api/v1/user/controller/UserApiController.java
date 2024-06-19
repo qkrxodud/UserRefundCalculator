@@ -27,13 +27,13 @@ public class UserApiController {
     @PostMapping("/signup")
     public ResponseEntity<String> signUp(@RequestBody UserParam userParam) {
         memberService.sinUp(userParam.toModel());
-        return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");
+        return ResponseEntity.status(HttpStatus.CREATED).body("회원을 등록하는데 성공하였습니다.");
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserLoginParam userLoginParam) {
         if (!memberService.login(userLoginParam.getUserId(), userLoginParam.getPassword())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("login fail");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("회원을 찾을수 없습니다.");
         }
         AccessToken accessToken = new AccessToken();
         accessToken.addAccessToken("accessToken", jwtUtil.generateToken(userLoginParam.getUserId()));

@@ -1,9 +1,6 @@
 package com.jobisnvillains.UserRefundCalculator.exception;
 
-import com.jobisnvillains.UserRefundCalculator.exception.customexceptions.AlreadyUserStateException;
-import com.jobisnvillains.UserRefundCalculator.exception.customexceptions.NotDefineUserStateException;
-import com.jobisnvillains.UserRefundCalculator.exception.customexceptions.NotRegisterUserStateException;
-import com.jobisnvillains.UserRefundCalculator.exception.customexceptions.RegNoIllegalStateException;
+import com.jobisnvillains.UserRefundCalculator.exception.customexceptions.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +34,18 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NotRegisterUserStateException.class)
     public ResponseEntity NotRegisterUserExHandler(NotRegisterUserStateException e) {
         ErrorResult errorResult = new ErrorResult("NotRegisterUserStateException", e.getMessage());
+        return new ResponseEntity(errorResult, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EmptyAPIDataStateException.class)
+    public ResponseEntity EmptyAPIDataExHandler(EmptyAPIDataStateException e) {
+        ErrorResult errorResult = new ErrorResult("EmptyAPIDataStateException", e.getMessage());
+        return new ResponseEntity(errorResult, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EmptyIncomeDataStateException.class)
+    public ResponseEntity EmptyIncomeDataExHandler(EmptyIncomeDataStateException e) {
+        ErrorResult errorResult = new ErrorResult("EmptyIncomeDataStateException", e.getMessage());
         return new ResponseEntity(errorResult, HttpStatus.BAD_REQUEST);
     }
 

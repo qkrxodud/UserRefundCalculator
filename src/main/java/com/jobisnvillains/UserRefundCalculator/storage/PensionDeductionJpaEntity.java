@@ -42,6 +42,13 @@ public class PensionDeductionJpaEntity {
 
     }
 
+    public PensionDeduction toModel() {
+        return PensionDeduction.builder()
+                .month(month)
+                .amount(amount)
+                .build();
+    }
+
     public static PensionDeductionJpaEntity fromModel(final PensionDeduction pensionDeduction, final IncomeJpaEntity incomeJpaEntity) {
         return PensionDeductionJpaEntity.builder()
                 .month(pensionDeduction.getMonth())

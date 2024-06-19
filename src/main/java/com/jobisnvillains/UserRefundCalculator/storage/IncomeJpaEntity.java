@@ -1,6 +1,8 @@
 package com.jobisnvillains.UserRefundCalculator.storage;
 
+import com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.domain.CreditCardDeduction;
 import com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.domain.Income;
+import com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.domain.PensionDeducations;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,6 +36,16 @@ public class IncomeJpaEntity {
         this.comprehensiveIncomeAmount = comprehensiveIncomeAmount;
         this.taxCredit = taxCredit;
         this.scrapUserJpaEntity = scrapUserJpaEntity;
+    }
+
+    public Income toModel(PensionDeducations pensionDeductions, CreditCardDeduction creditCardDeduction) {
+        return Income.builder()
+                .id(id)
+                .comprehensiveIncomeAmount(comprehensiveIncomeAmount)
+                .pensionDeductions(pensionDeductions)
+                .creditCardDeduction(creditCardDeduction)
+                .taxCredit(taxCredit)
+                .build();
     }
 
     public IncomeJpaEntity() {

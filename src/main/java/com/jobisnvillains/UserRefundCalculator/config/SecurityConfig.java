@@ -1,6 +1,5 @@
 package com.jobisnvillains.UserRefundCalculator.config;
 
-import com.jobisnvillains.UserRefundCalculator.filter.JwtRequestFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -23,9 +21,9 @@ public class SecurityConfig {
             "/3o3/v3/api-docs/**", "/3o3/swagger-config",
             "/v3/api-docs/**", "/3o3/swagger.html",
             "/3o3/swagger-ui/index.html",
-            "/szs/signup", "/szs/login", "/szs/scrap",
+            "/szs/signup", "/szs/login", "/szs/scrap", "/szs/refund",
     };
-    private final JwtRequestFilter jwtRequestFilter;
+    //private final JwtRequestFilter jwtRequestFilter;
     private final AuthenticationConfiguration authenticationConfiguration;
 
 
@@ -33,7 +31,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.sessionManagement(session -> session.disable());
 
-        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        //http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         http.csrf(csrfConfigurer -> csrfConfigurer.disable())
                 .authorizeHttpRequests( request -> request.requestMatchers(PERMIT_URL_ARRAY)

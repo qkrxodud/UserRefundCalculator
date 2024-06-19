@@ -1,6 +1,7 @@
 package com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.handler;
 
 import com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.domain.Income;
+import com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.handler.port.ScrapHandler;
 import com.jobisnvillains.UserRefundCalculator.exception.customexceptions.EmptyAPIDataStateException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

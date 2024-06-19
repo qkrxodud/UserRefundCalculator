@@ -8,9 +8,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/szs")
@@ -21,12 +22,21 @@ public class ScrapApiController {
     private final JwtUtil jwtUtil;
     private final ScrapService scrapService;
 
-
     @PostMapping("/scrap")
     public ResponseEntity<?> saveIncome(HttpServletRequest httpServletRequest) {
         String authorization = httpServletRequest.getHeader("Authorization");
         String jwtToken = authorization.substring(7);
         scrapService.saveIncomeInfo(jwtUtil.extractUserId(jwtToken));
-        return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");
+        return ResponseEntity.status(HttpStatus.CREATED).body("스크랩 저장에 성공하였습니다.");
+    }
+
+    @GetMapping("/refund")
+    public ResponseEntity<?> calculateTax(HttpServletRequest httpServletRequest) {
+        String authorization = httpServletRequest.getHeader("Authorization");
+        String jwtToken = authorization.substring(7);
+        String tax = scrapService.calculateTax(jwtUtil.extractUserId(jwtToken));
+        Map<String, String> response = new HashMap<>();
+        response.put("결정세액", tax);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

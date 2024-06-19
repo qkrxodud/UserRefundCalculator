@@ -1,11 +1,11 @@
 package com.jobisnvillains.UserRefundCalculator.storage;
 
 import com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.domain.CreditCardDeduction;
+import com.jobisnvillains.UserRefundCalculator.core.api.v1.scrap.domain.MonthlyDeductionAmounts;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
@@ -32,6 +32,13 @@ public class CreditCardDeductionJpaEntity {
         this.id = id;
         this.incomeJpaEntity = incomeJpaEntity;
         this.year = year;
+    }
+
+    public CreditCardDeduction toModel(final MonthlyDeductionAmounts monthlyDeductionAmounts) {
+        return CreditCardDeduction.builder()
+                .year(year)
+                .monthlyDeductionAmounts(monthlyDeductionAmounts)
+                .build();
     }
 
     public CreditCardDeductionJpaEntity() {

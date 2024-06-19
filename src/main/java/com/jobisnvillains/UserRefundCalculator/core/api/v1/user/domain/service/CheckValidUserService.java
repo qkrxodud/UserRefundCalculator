@@ -12,7 +12,7 @@ import java.util.Map;
 @Slf4j
 @Component
 public class CheckValidUserService {
-    private static final String NOT_DEFINE_USER = "등록되지 않은 사용자입니다.";
+    private static final String NOT_DEFINE_USER = "정의되지 않은 사용자입니다.";
     private static final Map<String, String> DEFINE_USERS = new HashMap<>() {{
         put("동탁", "921108-1582816");
         put("관우", "681108-1582816");
