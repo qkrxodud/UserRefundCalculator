@@ -7,15 +7,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class TaxService {
     public String calculateTax(final Long income, final Double deduction, final Long taxCredit) {
-        // 과세표준
-        Double taxBase = income - deduction; // 과세표준 = 종합소득금액 - 소득공제
-        TaxBracket bracket = TaxBracket.getBracket(taxBase);
+        Double taxBase = income - deduction;
+        Tax bracket = Tax.getBracket(taxBase);
 
         double calculatedTaxAmount;
-        if (bracket == TaxBracket.BRACKET_1) {
+        if (bracket == Tax.BRACKET_1) {
             calculatedTaxAmount = taxBase * bracket.getRate();
         } else {
-            calculatedTaxAmount = bracket.getFixedAmount() + (taxBase - bracket.getLowerBound() + 1) * bracket.getRate();
+            calculatedTaxAmount = bracket.getFixedAmount() + (taxBase - bracket.getLowerBound()) * bracket.getRate();
         }
 
         double determinedTaxAmount = calculatedTaxAmount - taxCredit;

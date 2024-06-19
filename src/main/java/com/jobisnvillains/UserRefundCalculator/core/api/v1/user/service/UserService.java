@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -24,8 +23,8 @@ public class UserService {
         User byUserId = userReader.findByUserId(user.getUserId());
         byUserId.checkRegisterUser();
 
-        Users users = userReader.findAll();
-        users.checkRegNo(user.getRegNo(), bCryptPasswordEncoder);
+        User byRegNo = userReader.findByRegNo(user.getRegNo());
+        byRegNo.checkRegisterUser();
 
         return userAppender.saveUser(user, bCryptPasswordEncoder);
     }

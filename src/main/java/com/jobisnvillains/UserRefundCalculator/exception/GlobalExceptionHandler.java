@@ -13,6 +13,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity RunTimeException(RuntimeException e) {
+        ErrorResult errorResult = new ErrorResult("RuntimeException", e.getMessage());
+        return new ResponseEntity(errorResult, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(RegNoIllegalStateException.class)
     public ResponseEntity RegNoExHandler(RegNoIllegalStateException e) {
         ErrorResult errorResult = new ErrorResult("RegNoIllegalStateException", e.getMessage());
